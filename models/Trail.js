@@ -16,7 +16,7 @@ const trailSchema = new mongoose.Schema({
   lastWorked: {
     type: Date,
     default: Date.now,
-    max: Date.now
+    max: Date.now,
   },
   comments: {
     type: String,
