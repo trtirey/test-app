@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 
 const router = express.Router();
 const Registration = mongoose.model('Registration');
+const Trail = mongoose.model('Trail');
 
 const path = require('path');
 const auth = require('http-auth')
@@ -17,10 +18,22 @@ router.get('/', (req, res) => {
   res.render('form', { title: 'Registration form' });
 });
 
+router.get('/trailupdater', (req, res) => {
+  res.render('trails', { title: 'Trails Updater' });
+});
+
 router.get('/registrations', basic.check((req, res) => {
   Registration.find()
     .then((registrations) => {
       res.render('index', { title: 'Listing registrations', registrations });
+    })
+    .catch(() => { res.send('Sorry! Something went wrong.'); });
+}));
+
+router.get('/traillog', basic.check((req, res) => {
+  Trail.find()
+    .then((trails) => {
+      res.render('index', { title: 'Listing trails', trails });
     })
     .catch(() => { res.send('Sorry! Something went wrong.'); });
 }));
