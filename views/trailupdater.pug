@@ -17,14 +17,40 @@ block content
       class="form-control"
       value=data.name
     )
+    label(for="junction1") Trail Start:
+    input(
+      type="junction1"
+      id="junction1"
+      name="junction1"
+      class="form-control"
+      value=data.junction1
+    )
+
+    label(for="junction2") Trail End:
+    input(
+      type="junction2"
+      id="junction2"
+      name="junction2"
+      class="form-control"
+      value=data.junction2
+    )
 
     label(for="lastWorked") Last Work Date:
     input(
-      type="lastWorked"
+      type="date"
       id="lastWorked"
       name="lastWorked"
       class="form-control"
       value=data.lastWorked
+    )
+
+    label(for="comments") Comments:
+    input(
+      type="comments"
+      id="comments"
+      name="comments"
+      class="form-control"
+      value=data.comments
     )
 
     input(

@@ -9,11 +9,13 @@ block content
         th Section Start
         th Section End
         th Last Worked
+        th Comments
       each trail in trails
         tr
           td= trail.name
           td= trail.junction1
           td= trail.junction2 
-          td= trail.lastWorked
+          td= trail.lastWorked 
+          td= trail.comments
   else
     p No trails yet :(
