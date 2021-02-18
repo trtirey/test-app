@@ -37,13 +37,13 @@ router.get('/trailupdater', (req, res) => {
 });
 
 // Processes browser requests for /traillog - the trail listings
-router.get('/traillog', basic.check((req, res) => {
+router.get('/traillog', (req, res) => {
   Trail.find()
     .then((trails) => {
-      res.render('index', { title: 'Listing trails', trails });
+      res.render('traillog', { title: 'Listing trails', trails });
     })
     .catch(() => { res.send('Sorry! Something went wrong.'); });
-}));
+});
 
 // Processes POST requests for / - adds (valid) input to the db
 router.post('/',

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+  if trails.length
+    table.listing-table.table-dark.table-striped
+      tr
+        th Name
+        th Section Start
+        th Section End
+        th Last Worked
+      each trail in trails
+        tr
+          td= trail.name
+          td= trail.junction1
+          td= trail.junction2 
+          td= trail.lastWorked
+  else
+    p No trails yet :(
