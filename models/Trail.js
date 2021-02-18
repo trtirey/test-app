@@ -5,11 +5,11 @@ const trailSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  juntion1: {
+  junction1: {
     type: String,
     trim: true,
   },
-  juntion2: {
+  junction2: {
     type: String,
     trim: true,
   },
