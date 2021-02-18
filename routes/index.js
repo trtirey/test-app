@@ -1,3 +1,4 @@
+// General imports
 const express = require('express');
 const mongoose = require('mongoose');
 const { check, validationResult } = require('express-validator');
@@ -9,19 +10,19 @@ const Trail = mongoose.model('Trail');
 const path = require('path');
 const auth = require('http-auth')
 
+// Instantiates basic, as used for 'admin' log-in
 const basic = auth.basic({
   file: path.join(__dirname, '../users.htpasswd'),
 });
 
-
+// Processes browser requests for localhost:3000/ - The registration form
 router.get('/', (req, res) => {
   res.render('form', { title: 'Registration form' });
 });
 
-router.get('/trailupdater', (req, res) => {
-  res.render('trails', { title: 'Trails Updater' });
-});
-
+// Processes browser requests for /registrations - the list of registrations
+// Basic.check drives the log-in feature, satisfied by the username & password
+// in users.htpasswd
 router.get('/registrations', basic.check((req, res) => {
   Registration.find()
     .then((registrations) => {
@@ -30,6 +31,12 @@ router.get('/registrations', basic.check((req, res) => {
     .catch(() => { res.send('Sorry! Something went wrong.'); });
 }));
 
+// Processes browser requests for /trailupdater - the trail work logging form
+router.get('/trailupdater', (req, res) => {
+  res.render('trails', { title: 'Trails Updater' });
+});
+
+// Processes browser requests for /traillog - the trail listings
 router.get('/traillog', basic.check((req, res) => {
   Trail.find()
     .then((trails) => {
@@ -38,6 +45,7 @@ router.get('/traillog', basic.check((req, res) => {
     .catch(() => { res.send('Sorry! Something went wrong.'); });
 }));
 
+// Processes POST requests for / - adds (valid) input to the db
 router.post('/',
   [
     check('name')
