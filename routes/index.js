@@ -33,7 +33,7 @@ router.get('/registrations', basic.check((req, res) => {
 
 // Processes browser requests for /trailupdater - the trail work logging form
 router.get('/trailupdater', (req, res) => {
-  res.render('trails', { title: 'Trails Updater' });
+  res.render('trailupdater', { title: 'Trails Updater' });
 });
 
 // Processes browser requests for /traillog - the trail listings
@@ -69,6 +69,36 @@ router.post('/',
     } else {
       res.render('form', {
         title: 'Registration form',
+        errors: errors.array(),
+        data: req.body,
+      });
+    }
+  }
+);
+
+router.post('/trailupdater',
+  [
+    check('name')
+      .isLength({ min: 1 })
+      .withMessage('Please enter a name'),
+    check('lastWorked')
+      .isLength({ min: 1 })
+      .withMessage('Please enter a work date'),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+
+    if (errors.isEmpty()) {
+      const trail = new Trail(req.body);
+      trail.save()
+        .then(() => { res.send('Thank you for your registration!'); })
+        .catch((err) => {
+          console.log(err);
+          res.send('Sorry! Something went wrong.');
+        });
+    } else {
+      res.render('trails', {
+        title: 'Trail Updater',
         errors: errors.array(),
         data: req.body,
       });
