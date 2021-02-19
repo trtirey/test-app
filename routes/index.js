@@ -98,8 +98,7 @@ router.post('/trailupdater',
       const trail = new Trail(req.body);
       trail.save()
         .then(() => { 
-          res.render('trailupdater')
-          res.send('Thank you for your registration!'); 
+          res.render('trailupdater', { title: 'Trails Updater' })
         })
         .catch((err) => {
           console.log(err);
