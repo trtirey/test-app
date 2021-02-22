@@ -15,6 +15,7 @@ mongoose.connection
   });
 
 require('./models/Registration');
+require('./models/Trail');
 const app = require('./app');
 
 const server = app.listen(3000, () => {
